@@ -1,6 +1,6 @@
 import { UserReqDto } from 'src/interfaces/user/userReq.dto';
 import { UserDto } from 'src/interfaces/common/user.dto';
-import { IUserRepository } from 'src/infrastructure/user/user.repository.interface';
+import { IUserRepository } from 'src/infrastructure/user.repository.interface';
 
 export class UserRepository implements IUserRepository {
   constructor() {}

@@ -1,7 +1,7 @@
 import { IUserService } from './user.sevice';
 import { UserReqDto } from 'src/interfaces/user/userReq.dto';
 import { UserDto } from 'src/interfaces/common/user.dto';
-import { IUserRepository } from 'src/infrastructure/user/user.repository.interface';
+import { IUserRepository } from 'src/infrastructure/user.repository.interface';
 
 export class UserServiceImpl implements IUserService {
   constructor(private readonly userRepo: IUserRepository) {}
