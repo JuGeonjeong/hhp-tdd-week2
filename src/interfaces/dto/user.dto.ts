@@ -1,5 +1,5 @@
 import { IsInt, IsString } from 'class-validator';
-import { User } from 'src/database/user.model';
+import { User } from 'src/infrastructure/database/user.model';
 
 export class UserDto {
   @IsInt()
