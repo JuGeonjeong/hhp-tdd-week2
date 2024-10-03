@@ -1,4 +1,4 @@
-import { User } from 'src/infrastructure/database/user.model';
+import { User } from 'src/domain/entities/user.entity';
 import { UserReqDto } from 'src/interfaces/dto/userReq.dto';
 
 export interface IUserService {

@@ -12,14 +12,10 @@ export class UserServiceImpl implements IUserService {
   ) {}
 
   async createUser(values: UserReqDto): Promise<UserDto> {
-    const data = await this.userRepository.create(values);
-
-    return new UserDto(data);
+    return await this.userRepository.create(values);
   }
 
   async findUser(userId: number): Promise<UserDto> {
-    const data = await this.userRepository.findOne(userId);
-
-    return new UserDto(data);
+    return await this.userRepository.findOne(userId);
   }
 }

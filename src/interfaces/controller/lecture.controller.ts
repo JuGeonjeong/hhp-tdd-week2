@@ -12,14 +12,15 @@ import { ILectureService } from 'src/application/service/lecture.service';
 import { LectureReqDto } from '../dto/lectureReq.dto';
 import { LectureDto } from '../dto/lecture.dto';
 import { JoinUserReq } from '../dto/joinUserReq.dto';
-import { LectureAllReqDto } from '../dto/lectureAllReq.dto';
+import { LectureUser } from 'src/domain/entities/lectureUser.entity';
 
-@Controller('lecture')
+@Controller('/lecture')
 export class LectureController {
   constructor(
     @Inject('ILectureService') private readonly lectureService: ILectureService,
   ) {}
 
+  // 특강 등록
   @Post('')
   async create(
     @Body(ValidationPipe) lectureReqDto: LectureReqDto,
@@ -27,23 +28,25 @@ export class LectureController {
     return await this.lectureService.createLecture(lectureReqDto);
   }
 
+  // 특강 단일 조회
   @Get(':id')
   async findOne(@Param('id') id): Promise<LectureDto> {
     const lectureId = Number.parseInt(id);
     return await this.lectureService.findLecture(lectureId);
   }
 
-  @Get('list/:id')
-  async findAll(
-    @Query(ValidationPipe) listDto: LectureAllReqDto,
-  ): Promise<LectureDto[]> {
-    return await this.lectureService.findLectureAll(listDto);
+  // 특강 목록 조회
+  // userId값이 있을시 신청완료 목록
+  @Get('list/:userId')
+  async findAll(@Query('userId') userId): Promise<any[]> {
+    return await this.lectureService.findLectureAll(userId);
   }
 
-  @Post('/joinUser')
+  // 특강 신청
+  @Post('joinUser')
   async joinUser(
     @Body(ValidationPipe) joinUserReqDto: JoinUserReq,
-  ): Promise<LectureDto> {
+  ): Promise<LectureUser> {
     return await this.lectureService.joinUser(joinUserReqDto);
   }
 }

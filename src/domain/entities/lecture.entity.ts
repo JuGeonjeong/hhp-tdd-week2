@@ -15,7 +15,7 @@ export class Lecture {
   @Column({ type: String })
   professor: string;
 
-  @Column({ default: 0, type: Number })
+  @Column({ default: 30, type: Number })
   maximum: number;
 
   @Column({ default: 0, type: Number })

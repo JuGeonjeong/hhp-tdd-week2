@@ -10,6 +10,7 @@ export class LectureUserServiceImpl implements ILectureUserService {
     @Inject('ILectureUserRepository')
     private readonly lectureUserRepository: ILectureUserRepository,
   ) {}
+
   async create(values: JoinUserReq): Promise<LectureUserDto> {
     const data = await this.lectureUserRepository.create(values);
 

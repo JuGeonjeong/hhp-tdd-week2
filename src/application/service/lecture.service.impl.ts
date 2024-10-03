@@ -3,12 +3,12 @@ import { LectureDto } from 'src/interfaces/dto/lecture.dto';
 import { LectureReqDto } from 'src/interfaces/dto/lectureReq.dto';
 import { ILectureRepository } from 'src/infrastructure/repositories/lecture.repository.interface';
 import { ILectureService } from './lecture.service';
-import { LectureAllReqDto } from 'src/interfaces/dto/lectureAllReq.dto';
 import { JoinUserReq } from 'src/interfaces/dto/joinUserReq.dto';
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 import { LectureUserDto } from 'src/interfaces/dto/lectureUser.dto';
 import { ILectureUserService } from './lectureUser.service';
 import { IUserService } from './user.service';
+import { Mutex } from 'async-mutex';
 
 @Injectable()
 export class LectureServiceImpl implements ILectureService {
@@ -23,39 +23,51 @@ export class LectureServiceImpl implements ILectureService {
 
   async createLecture(values: LectureReqDto): Promise<LectureDto> {
     const data = await this.lectureRepository.create(values);
-
     return new LectureDto(data);
   }
 
   async findLecture(id: number): Promise<LectureDto> {
     const data = await this.lectureRepository.findOne(id);
-
     return new LectureDto(data);
   }
 
-  async findLectureAll(values: LectureAllReqDto): Promise<LectureDto[]> {
-    const data = await this.lectureRepository.findAll(values);
-
-    return data.map((lecture) => new LectureDto(lecture));
+  async findLectureAll(userId: number): Promise<any[]> {
+    const data = await this.lectureRepository.findAll(userId);
+    console.log('service', data);
+    return data;
   }
 
   async joinUser(values: JoinUserReq): Promise<LectureUserDto> {
+    const mutex = new Mutex();
     const { userId, lectureId } = values;
     const now = dayjs();
     now.format('YYYY-MM-DD');
     const exUser = await this.userService.findUser(userId);
-    const exLecture = await this.lectureRepository.findOne(lectureId);
-    const exlectureUser = await this.lectureUserService.findOne(values);
     if (!exUser)
-      throw new BadRequestException(`없는 데이터입니다. id: ${userId}`);
-    if (!exLecture)
-      throw new BadRequestException(`없는 데이터입니다. id: ${lectureId}`);
-    if (exlectureUser) throw new BadRequestException(`이미 신청한 강의입니다.`);
-    if (now > dayjs(exLecture.date))
-      throw new BadRequestException(`지난 강의 입니다.`);
+      throw new BadRequestException(`없는 유저 데이터입니다. id: ${userId}`);
+    const exlectureUser = await this.lectureUserService.findOne(values);
+    if (exlectureUser.id)
+      throw new BadRequestException(`이미 신청한 강의입니다.`);
 
-    const lectrueUser = await this.lectureUserService.create(values);
+    return mutex.runExclusive(async () => {
+      const exLecture = await this.lectureRepository.findOne(lectureId);
+      if (!exLecture)
+        throw new BadRequestException(
+          `없는 강의 데이터입니다. id: ${lectureId}`,
+        );
+      if (now > dayjs(exLecture.date))
+        throw new BadRequestException(`지난 강의 입니다.`);
+      if (exLecture.count >= exLecture.maximum)
+        throw new BadRequestException(`인원이 초과된 강의입니다.`);
 
-    return new LectureUserDto(lectrueUser);
+      const lectrueUser = await this.lectureUserService.create(values);
+      await this.addCount(lectureId);
+
+      return new LectureUserDto(lectrueUser);
+    });
+  }
+
+  async addCount(lectureId: number) {
+    return await this.lectureRepository.update(lectureId);
   }
 }

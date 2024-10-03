@@ -19,6 +19,8 @@ export class LectureUserDto {
 
   @IsInt()
   count: number;
+
+  @IsString()
   createdAt;
 
   @IsInt()
@@ -28,9 +30,12 @@ export class LectureUserDto {
 
   @IsInt()
   lectureId;
+
   lecture;
 
   constructor(lectureUser: LectureUser) {
-    this.id = lectureUser.id;
+    this.id = lectureUser?.id;
+    this.userId = lectureUser?.userId;
+    this.lectureId = lectureUser?.lectureId;
   }
 }

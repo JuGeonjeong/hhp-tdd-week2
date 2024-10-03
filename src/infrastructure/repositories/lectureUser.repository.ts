@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { LectureUser } from 'src/domain/entities/lectureUser.entity';
 import { ILectureUserRepository } from './lectureUser.repository.interface';
 import { JoinUserReq } from 'src/interfaces/dto/joinUserReq.dto';
-import { LectureUserDto } from 'src/interfaces/dto/lectureUser.dto';
 
 @Injectable()
 export class LectureUserRepository implements ILectureUserRepository {
@@ -15,20 +14,16 @@ export class LectureUserRepository implements ILectureUserRepository {
 
   async create(values: JoinUserReq): Promise<LectureUser> {
     const lectureUser = this.lectureUserRepository.create(values);
-    await this.lectureUserRepository.save(lectureUser);
-
-    return lectureUser;
+    return await this.lectureUserRepository.save(lectureUser);
   }
 
-  async findOne(values: JoinUserReq): Promise<LectureUserDto> {
+  async findOne(values: JoinUserReq): Promise<LectureUser> {
     const { userId, lectureId } = values;
-    const query = this.lectureUserRepository.createQueryBuilder('lu');
+    const query = this.lectureUserRepository.createQueryBuilder('lectureUser');
     query
-      .where('lu.userId = :userId', { userId })
-      .andWhere('lu.lectureId = :lectureId', { lectureId });
+      .where('lectureUser.userId = :userId', { userId })
+      .andWhere('lectureUser.lectureId = :lectureId', { lectureId });
 
-    const data = await query.getOne();
-
-    return new LectureUserDto(data);
+    return await query.getOne();
   }
 }
