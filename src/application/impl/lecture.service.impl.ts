@@ -2,11 +2,11 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { LectureDto } from 'src/interface/dto/res/lecture.dto';
 import { LectureReqDto } from 'src/interface/dto/req/lectureReq.dto';
 import { ILectureRepository } from 'src/infrastructure/interfaces/lecture.repository.interface';
-import { ILectureService } from './lecture.service';
+import { ILectureService } from '../service/lecture.service';
 import * as dayjs from 'dayjs';
 import { LectureUserDto } from 'src/interface/dto/res/lectureUser.dto';
-import { ILectureUserService } from './lectureUser.service';
-import { IUserService } from './user.service';
+import { ILectureUserService } from '../service/lectureUser.service';
+import { IUserService } from '../service/user.service';
 import { Mutex } from 'async-mutex';
 import { JoinUserReq } from 'src/interface/dto/req/joinUserReq.dto';
 
