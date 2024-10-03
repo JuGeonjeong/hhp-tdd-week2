@@ -9,7 +9,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class UserRepository implements IUserRepository {
   constructor(
-    @InjectRepository(User) // TypeORM의 Repository<User> 주입
+    @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
 

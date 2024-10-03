@@ -7,9 +7,9 @@ import {
   Post,
   ValidationPipe,
 } from '@nestjs/common';
-import { User } from 'src/infrastructure/database/user.model';
 import { IUserService } from 'src/application/service/user.service';
 import { UserReqDto } from '../dto/userReq.dto';
+import { User } from 'src/domain/entities/user.entity';
 
 @Controller('user')
 export class UserController {

@@ -6,5 +6,4 @@ export interface ILectureRepository {
   create(values: LectureReqDto): Promise<Lecture>;
   findOne(id: number): Promise<Lecture>;
   findAll(values: LectureAllReqDto): Promise<Lecture[]>;
-  // joinUser(values: JoinUserReq): Promise<Lecture>;
 }

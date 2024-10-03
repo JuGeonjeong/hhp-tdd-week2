@@ -5,11 +5,13 @@ import {
   Inject,
   Param,
   Post,
+  Query,
   ValidationPipe,
 } from '@nestjs/common';
 import { ILectureService } from 'src/application/service/lecture.service';
 import { LectureReqDto } from '../dto/lectureReq.dto';
 import { LectureDto } from '../dto/lecture.dto';
+import { JoinUserReq } from '../dto/joinUserReq.dto';
 import { LectureAllReqDto } from '../dto/lectureAllReq.dto';
 
 @Controller('lecture')
@@ -25,23 +27,23 @@ export class LectureController {
     return await this.lectureService.createLecture(lectureReqDto);
   }
 
-  @Get('/:id')
+  @Get(':id')
   async findOne(@Param('id') id): Promise<LectureDto> {
     const lectureId = Number.parseInt(id);
     return await this.lectureService.findLecture(lectureId);
   }
 
-  @Get('/list')
+  @Get('list/:id')
   async findAll(
-    @Body(ValidationPipe) LectureAllReqDto: LectureAllReqDto,
+    @Query(ValidationPipe) listDto: LectureAllReqDto,
   ): Promise<LectureDto[]> {
-    return await this.lectureService.findLectureAll(LectureAllReqDto);
+    return await this.lectureService.findLectureAll(listDto);
   }
 
-  // @Post('/joinUser')
-  // async joinUser(
-  //   @Body(ValidationPipe) joinUserReqDto: JoinUserReq,
-  // ): Promise<LectureDto> {
-  //   return await this.lectureService.joinUser(joinUserReqDto);
-  // }
+  @Post('/joinUser')
+  async joinUser(
+    @Body(ValidationPipe) joinUserReqDto: JoinUserReq,
+  ): Promise<LectureDto> {
+    return await this.lectureService.joinUser(joinUserReqDto);
+  }
 }

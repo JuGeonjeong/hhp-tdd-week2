@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class JoinUserReq {
   @IsNumber()
@@ -8,8 +8,4 @@ export class JoinUserReq {
   @IsNumber()
   @IsNotEmpty()
   lectureId: number;
-
-  @IsDateString()
-  @IsNotEmpty()
-  date: string;
 }

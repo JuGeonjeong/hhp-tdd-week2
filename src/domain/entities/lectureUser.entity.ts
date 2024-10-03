@@ -1,4 +1,4 @@
-import { IsDate, IsInt } from 'class-validator';
+import { IsDate } from 'class-validator';
 import {
   Column,
   CreateDateColumn,
@@ -12,7 +12,6 @@ import { Lecture } from './lecture.entity';
 
 @Entity()
 export class LectureUser {
-  @IsInt()
   @PrimaryGeneratedColumn()
   id: number;
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ILectureRepository } from './lecture.repository.interface';
 import { LectureReqDto } from 'src/interfaces/dto/lectureReq.dto';
-
 import { InjectRepository } from '@nestjs/typeorm';
 import { Lecture } from 'src/domain/entities/lecture.entity';
 import { Repository } from 'typeorm';
@@ -30,19 +29,13 @@ export class LectureRepository implements ILectureRepository {
   }
 
   async findAll(values: LectureAllReqDto): Promise<LectureDto[]> {
-    console.log('1');
-    const data = await this.lectureRepository
-      .createQueryBuilder('lecture')
-      .getMany();
-    ///////////////////////////////// 이어하기
-    console.log('2');
-    console.log(data);
+    const { userId } = values;
+    const query = this.lectureRepository.createQueryBuilder('lecture');
+    if (userId) {
+      query.where('lecture.userId = :userId', { userId });
+    }
+    const data = await query.getMany();
+
     return data.map((lecture) => new LectureDto(lecture));
   }
-
-  // async joinUser(values: JoinUserReq): Promise<Lecture> {
-  //   // 신청이력
-  //   // 인원체크
-  //   throw new Error('Method not implemented.');
-  // }
 }
