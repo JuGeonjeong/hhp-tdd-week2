@@ -1,14 +1,14 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { LectureDto } from 'src/interfaces/dto/lecture.dto';
-import { LectureReqDto } from 'src/interfaces/dto/lectureReq.dto';
-import { ILectureRepository } from 'src/infrastructure/repositories/lecture.repository.interface';
+import { LectureDto } from 'src/interface/dto/res/lecture.dto';
+import { LectureReqDto } from 'src/interface/dto/req/lectureReq.dto';
+import { ILectureRepository } from 'src/infrastructure/interfaces/lecture.repository.interface';
 import { ILectureService } from './lecture.service';
-import { JoinUserReq } from 'src/interfaces/dto/joinUserReq.dto';
 import * as dayjs from 'dayjs';
-import { LectureUserDto } from 'src/interfaces/dto/lectureUser.dto';
+import { LectureUserDto } from 'src/interface/dto/res/lectureUser.dto';
 import { ILectureUserService } from './lectureUser.service';
 import { IUserService } from './user.service';
 import { Mutex } from 'async-mutex';
+import { JoinUserReq } from 'src/interface/dto/req/joinUserReq.dto';
 
 @Injectable()
 export class LectureServiceImpl implements ILectureService {

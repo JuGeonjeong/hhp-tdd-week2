@@ -1,8 +1,8 @@
 import { IUserService } from './user.service';
-import { UserReqDto } from 'src/interfaces/dto/userReq.dto';
-import { UserDto } from 'src/interfaces/dto/user.dto';
+import { UserReqDto } from 'src/interface/dto/res/userReq.dto';
+import { UserDto } from 'src/interface/dto/res/user.dto';
 import { Inject, Injectable } from '@nestjs/common';
-import { IUserRepository } from 'src/infrastructure/repositories/user.repository.interface';
+import { IUserRepository } from 'src/infrastructure/interfaces/user.repository.interface';
 
 @Injectable()
 export class UserServiceImpl implements IUserService {

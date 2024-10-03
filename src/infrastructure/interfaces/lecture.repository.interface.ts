@@ -1,6 +1,6 @@
-import { LectureReqDto } from 'src/interfaces/dto/lectureReq.dto';
+import { LectureReqDto } from 'src/interface/dto/req/lectureReq.dto';
 import { Lecture } from 'src/domain/entities/lecture.entity';
-import { GroupedLectureDto } from 'src/interfaces/dto/groupLecture.dto';
+import { GroupedLectureDto } from 'src/interface/dto/res/groupLecture.dto';
 
 export interface ILectureRepository {
   create(values: LectureReqDto): Promise<Lecture>;

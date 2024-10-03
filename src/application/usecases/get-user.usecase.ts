@@ -1,4 +1,4 @@
-import { IUserRepository } from 'src/infrastructure/repositories/user.repository.interface';
+import { IUserRepository } from 'src/infrastructure/interfaces/user.repository.interface';
 
 export class GetUser {
   constructor(private readonly userRepository: IUserRepository) {}

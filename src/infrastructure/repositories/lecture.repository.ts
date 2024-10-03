@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { ILectureRepository } from './lecture.repository.interface';
-import { LectureReqDto } from 'src/interfaces/dto/lectureReq.dto';
+import { ILectureRepository } from '../interfaces/lecture.repository.interface';
+import { LectureReqDto } from 'src/interface/dto/req/lectureReq.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Lecture } from 'src/domain/entities/lecture.entity';
 import { Repository } from 'typeorm';
-import { LectureDto } from 'src/interfaces/dto/lecture.dto';
-import { GroupedLectureDto } from 'src/interfaces/dto/groupLecture.dto';
+import { LectureDto } from 'src/interface/dto/res/lecture.dto';
+import { GroupedLectureDto } from 'src/interface/dto/res/groupLecture.dto';
 import * as dayjs from 'dayjs';
 
 @Injectable()

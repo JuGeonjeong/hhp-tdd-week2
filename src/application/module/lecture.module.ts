@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Lecture } from 'src/domain/entities/lecture.entity';
-import { LectureController } from 'src/interfaces/controller/lecture.controller';
+import { LectureController } from 'src/interface/controller/lecture.controller';
 import { LectureRepository } from 'src/infrastructure/repositories/lecture.repository';
 import { LectureServiceImpl } from '../service/lecture.service.impl';
 import { LectureUserRepository } from 'src/infrastructure/repositories/lectureUser.repository';

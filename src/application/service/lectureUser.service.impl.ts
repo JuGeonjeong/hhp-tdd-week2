@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ILectureUserRepository } from 'src/infrastructure/repositories/lectureUser.repository.interface';
+import { ILectureUserRepository } from 'src/infrastructure/interfaces/lectureUser.repository.interface';
 import { ILectureUserService } from './lectureUser.service';
-import { JoinUserReq } from 'src/interfaces/dto/joinUserReq.dto';
-import { LectureUserDto } from 'src/interfaces/dto/lectureUser.dto';
+import { LectureUserDto } from 'src/interface/dto/res/lectureUser.dto';
+import { JoinUserReq } from 'src/interface/dto/req/joinUserReq.dto';
 
 @Injectable()
 export class LectureUserServiceImpl implements ILectureUserService {

@@ -2,8 +2,8 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LectureUser } from 'src/domain/entities/lectureUser.entity';
-import { ILectureUserRepository } from './lectureUser.repository.interface';
-import { JoinUserReq } from 'src/interfaces/dto/joinUserReq.dto';
+import { ILectureUserRepository } from '../interfaces/lectureUser.repository.interface';
+import { JoinUserReq } from 'src/interface/dto/req/joinUserReq.dto';
 
 @Injectable()
 export class LectureUserRepository implements ILectureUserRepository {

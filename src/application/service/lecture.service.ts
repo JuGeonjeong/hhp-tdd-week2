@@ -1,7 +1,7 @@
-import { JoinUserReq } from 'src/interfaces/dto/joinUserReq.dto';
-import { LectureDto } from 'src/interfaces/dto/lecture.dto';
-import { LectureReqDto } from 'src/interfaces/dto/lectureReq.dto';
-import { LectureUserDto } from 'src/interfaces/dto/lectureUser.dto';
+import { LectureDto } from 'src/interface/dto/res/lecture.dto';
+import { LectureReqDto } from 'src/interface/dto/req/lectureReq.dto';
+import { LectureUserDto } from 'src/interface/dto/res/lectureUser.dto';
+import { JoinUserReq } from 'src/interface/dto/req/joinUserReq.dto';
 
 export interface ILectureService {
   createLecture(values: LectureReqDto): Promise<LectureDto>;

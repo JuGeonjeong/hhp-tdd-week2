@@ -1,5 +1,5 @@
 import { LectureUser } from 'src/domain/entities/lectureUser.entity';
-import { JoinUserReq } from 'src/interfaces/dto/joinUserReq.dto';
+import { JoinUserReq } from 'src/interface/dto/req/joinUserReq.dto';
 
 export interface ILectureUserRepository {
   create(values: JoinUserReq): Promise<LectureUser>;

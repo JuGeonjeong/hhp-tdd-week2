@@ -1,5 +1,5 @@
-import { UserReqDto } from 'src/interfaces/dto/userReq.dto';
-import { IUserRepository } from 'src/infrastructure/repositories/user.repository.interface';
+import { UserReqDto } from 'src/interface/dto/res/userReq.dto';
+import { IUserRepository } from 'src/infrastructure/interfaces/user.repository.interface';
 import { Repository } from 'typeorm';
 import { User } from 'src/domain/entities/user.entity';
 import { Injectable } from '@nestjs/common';

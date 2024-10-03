@@ -9,9 +9,9 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ILectureService } from 'src/application/service/lecture.service';
-import { LectureReqDto } from '../dto/lectureReq.dto';
-import { LectureDto } from '../dto/lecture.dto';
-import { JoinUserReq } from '../dto/joinUserReq.dto';
+import { LectureReqDto } from '../dto/req/lectureReq.dto';
+import { LectureDto } from '../dto/res/lecture.dto';
+import { JoinUserReq } from '../dto/req/joinUserReq.dto';
 import { LectureUser } from 'src/domain/entities/lectureUser.entity';
 
 @Controller('/lecture')
