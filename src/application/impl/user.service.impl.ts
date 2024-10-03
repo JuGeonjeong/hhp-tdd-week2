@@ -1,4 +1,4 @@
-import { IUserService } from './user.service';
+import { IUserService } from '../service/user.service';
 import { UserReqDto } from 'src/interface/dto/res/userReq.dto';
 import { UserDto } from 'src/interface/dto/res/user.dto';
 import { Inject, Injectable } from '@nestjs/common';
